@@ -2,7 +2,7 @@
 {
     public enum CardNumber
     {
-        NotAssinged = -1,
+        NotAssigned = -1,
         Ace = 1,
         Two = 2,
         Three = 3,

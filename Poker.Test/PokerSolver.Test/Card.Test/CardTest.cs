@@ -60,11 +60,12 @@ namespace Poker.Test.PokerSolver.Test.Card.Test
         }
 
         [Test]
-        public void DoesCreatingCardWithIncorrectStringThrowException()
+        [TestCase("$$")]
+        [TestCase("")]
+        [TestCase("D")]
+        [TestCase("Hello")]
+        public void DoesCreatingCardWithIncorrectStringThrowException(string cardValue)
         {
-            //Arrange
-            const string cardValue = "$$";
-
             //Assert
             Assert.Throws<ArgumentException>(() =>
             {

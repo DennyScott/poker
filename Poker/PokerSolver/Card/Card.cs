@@ -14,13 +14,14 @@ namespace Poker.PokerSolver.Card
 
         public Card(string cardValue)
         {
+            if (cardValue.Length != 2) throw new ArgumentException(IncorrectArgument);
+
             Number = ParseCharacterToNumber(cardValue[0]);
             Suit = ParseCharacterToSuit(cardValue[1]);
-            if (Number == CardNumber.NotAssinged || Suit == CardSuit.NotAssigned)
-            {
+
+            if (Number == CardNumber.NotAssigned || Suit == CardSuit.NotAssigned)
                 throw new ArgumentException(IncorrectArgument);
-            }
-        } 
+        }
 
         public CardNumber Number { get; }
         public CardSuit Suit { get; }
@@ -93,13 +94,11 @@ namespace Poker.PokerSolver.Card
                     number = CardNumber.King;
                     break;
                 default:
-                    number = CardNumber.NotAssinged;
+                    number = CardNumber.NotAssigned;
                     break;
             }
- 
+
             return number;
         }
-
-
     }
 }
