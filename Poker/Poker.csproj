@@ -47,6 +47,8 @@
     <Compile Include="PokerSolver\Card\CardNumber.cs" />
     <Compile Include="PokerSolver\Card\CardSuit.cs" />
     <Compile Include="PokerSolver\Card\ICard.cs" />
+    <Compile Include="PokerSolver\Hand\Hand.cs" />
+    <Compile Include="PokerSolver\Hand\IHand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
