@@ -64,6 +64,8 @@ namespace Poker.Test.PokerSolver.Test.Card.Test
         [TestCase("")]
         [TestCase("D")]
         [TestCase("Hello")]
+        [TestCase("55D")]
+        [TestCase("4T")]
         public void DoesCreatingCardWithIncorrectStringThrowException(string cardValue)
         {
             //Assert
