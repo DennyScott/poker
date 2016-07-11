@@ -24,7 +24,7 @@ namespace Poker.PokerSolver.Card
         #region Constructor
 
         /// <summary>
-        /// Constructor
+        /// Constructor using passed enum values.
         /// </summary>
         /// <param name="number">Given number of the card</param>
         /// <param name="suit">Given suit of the card</param>
