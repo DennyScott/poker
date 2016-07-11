@@ -47,14 +47,24 @@
     <Compile Include="PokerSolver\Card\CardNumber.cs" />
     <Compile Include="PokerSolver\Card\CardSuit.cs" />
     <Compile Include="PokerSolver\Card\ICard.cs" />
+    <Compile Include="PokerSolver\Combination\Flush.cs" />
+    <Compile Include="PokerSolver\Combination\HighCard.cs" />
+    <Compile Include="PokerSolver\Combination\ICombination.cs" />
+    <Compile Include="PokerSolver\Combination\Pair.cs" />
+    <Compile Include="PokerSolver\Combination\ThreeOfAKind.cs" />
+    <Compile Include="PokerSolver\Game\Game.cs" />
+    <Compile Include="PokerSolver\Game\IGame.cs" />
     <Compile Include="PokerSolver\Hand\Hand.cs" />
     <Compile Include="PokerSolver\Hand\IHand.cs" />
+    <Compile Include="PokerSolver\Player\IPlayer.cs" />
+    <Compile Include="PokerSolver\Player\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

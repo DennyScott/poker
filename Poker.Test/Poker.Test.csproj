@@ -44,8 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Combination.Test\Flushtest.cs" />
+    <Compile Include="Combination.Test\HighCardTest.cs" />
+    <Compile Include="Combination.Test\PairTest.cs" />
+    <Compile Include="Combination.Test\ThreeOfAKindTest.cs" />
     <Compile Include="PokerSolver.Test\Card.Test\CardTest.cs" />
+    <Compile Include="PokerSolver.Test\Game.Test\GameTest.cs" />
     <Compile Include="PokerSolver.Test\Hand.Test\HandTest.cs" />
+    <Compile Include="PokerSolver.Test\Player.Test\PlayerTest.cs" />
     <Compile Include="ProgramTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

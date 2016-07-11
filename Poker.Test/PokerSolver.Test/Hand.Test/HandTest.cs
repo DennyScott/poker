@@ -98,7 +98,7 @@ namespace Poker.Test.PokerSolver.Test.Hand.Test
             _hand.AddCard(_cardOne);
 
             //Act
-            _hand.AddCard(0, _cardTwo);
+            _hand.InsertCard(0, _cardTwo);
 
             //Assert
             Assert.IsTrue(_hand.IsCard(0, _cardTwo));
@@ -149,20 +149,48 @@ namespace Poker.Test.PokerSolver.Test.Hand.Test
         }
 
         [Test]
+        public void HandReachingMaxSizeShouldBeFull()
+        {
+            //Arrange
+            FillHand();
+
+            //Assert
+            Assert.IsTrue(_hand.IsFull());
+        }
+
+        [Test]
         public void AddingMoreThenMaxCardsShouldDoNothing()
         {
             //Arrage
-            _hand.AddCard(_cardOne);
-            _hand.AddCard(_cardTwo);
-            _hand.AddCard(new Poker.PokerSolver.Card.Card("7C"));
-            _hand.AddCard(new Poker.PokerSolver.Card.Card("8C"));
-            _hand.AddCard(new Poker.PokerSolver.Card.Card("9C"));
+            FillHand();
 
             //Act
             _hand.AddCard(new Poker.PokerSolver.Card.Card("10C"));
 
             //Assert
             Assert.AreEqual(_hand.MaxSize, _hand.Count);
+        }
+
+        [Test]
+        public void FindHighCardWillReturnTheCardWithTheHighestNumber()
+        {
+            //Arrange
+            FillHand();
+
+            //Act
+            var topCard = _hand.FindHighCard();
+
+            //Assert
+            Assert.AreEqual(CardNumber.Nine, topCard.Number);
+        }
+
+        public void FillHand()
+        {
+            _hand.AddCard(_cardOne);
+            _hand.AddCard(_cardTwo);
+            _hand.AddCard(new Poker.PokerSolver.Card.Card("7C"));
+            _hand.AddCard(new Poker.PokerSolver.Card.Card("8C"));
+            _hand.AddCard(new Poker.PokerSolver.Card.Card("9C"));
         }
     }
 }

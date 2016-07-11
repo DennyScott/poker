@@ -14,10 +14,15 @@ namespace Poker.PokerSolver.Card
 
         public Card(string cardValue)
         {
-            if (cardValue.Length != 2) throw new ArgumentException(IncorrectArgument);
+            if (cardValue.Length != 2 && cardValue.Length != 3)
+            {
+                throw new ArgumentException(IncorrectArgument);
+            }
 
-            Number = ParseCharacterToNumber(cardValue[0]);
-            Suit = ParseCharacterToSuit(cardValue[1]);
+            var lastCharacterPosition = cardValue.Length - 1;
+
+            Number = ParseStringToCardNumber(cardValue.Substring(0, lastCharacterPosition));
+            Suit = ParseCharacterToSuit(cardValue[lastCharacterPosition]);
 
             if (Number == CardNumber.NotAssigned || Suit == CardSuit.NotAssigned)
                 throw new ArgumentException(IncorrectArgument);
@@ -52,45 +57,48 @@ namespace Poker.PokerSolver.Card
             return suit;
         }
 
-        private CardNumber ParseCharacterToNumber(char num)
+        private CardNumber ParseStringToCardNumber(string num)
         {
             CardNumber number;
             switch (num)
             {
-                case 'A':
+                case "A":
                     number = CardNumber.Ace;
                     break;
-                case '2':
+                case "2":
                     number = CardNumber.Two;
                     break;
-                case '3':
+                case "3":
                     number = CardNumber.Three;
                     break;
-                case '4':
+                case "4":
                     number = CardNumber.Four;
                     break;
-                case '5':
+                case "5":
                     number = CardNumber.Five;
                     break;
-                case '6':
+                case "6":
                     number = CardNumber.Six;
                     break;
-                case '7':
+                case "7":
                     number = CardNumber.Seven;
                     break;
-                case '8':
+                case "8":
                     number = CardNumber.Eight;
                     break;
-                case '9':
+                case "9":
                     number = CardNumber.Nine;
                     break;
-                case 'J':
+                case "10":
+                    number = CardNumber.Ten;
+                    break;
+                case "J":
                     number = CardNumber.Jack;
                     break;
-                case 'Q':
+                case "Q":
                     number = CardNumber.Queen;
                     break;
-                case 'K':
+                case "K":
                     number = CardNumber.King;
                     break;
                 default:

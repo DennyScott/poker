@@ -34,16 +34,16 @@ namespace Poker.Test.PokerSolver.Test.Card.Test
         }
 
         [Test]
-        public void DoesCreatingCardWithStringStoreNumber()
+        [TestCase(CardNumber.Two, "2C")]
+        [TestCase(CardNumber.Five, "5D")]
+        [TestCase(CardNumber.Ten, "10C")]
+        public void DoesCreatingCardWithStringStoreNumber(CardNumber stateNumber, string cardValue)
         {
-            //Arrange
-            const string cardValue = "5D";
-
             //Act
             _card = new Poker.PokerSolver.Card.Card(cardValue);
 
             //Assert
-            Assert.AreEqual(CardNumber.Five, _card.Number);
+            Assert.AreEqual(stateNumber, _card.Number);
         }
 
         [Test]

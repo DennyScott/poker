@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Poker.PokerSolver.Card;
 
 namespace Poker.PokerSolver.Hand
@@ -14,10 +15,6 @@ namespace Poker.PokerSolver.Hand
         }
 
         public int MaxSize { get; }
-        public object Clone()
-        {
-            throw new System.NotImplementedException();
-        }
 
         public bool RemoveCard(int position)
         {
@@ -34,14 +31,20 @@ namespace Poker.PokerSolver.Hand
             throw new System.NotImplementedException();
         }
 
-        public void AddCard(int position, ICard card)
+        public void InsertCard(int position, ICard card)
         {
-            throw new System.NotImplementedException();
+            if (CanAddCard(card))
+            {
+                _hand.Insert(position, card);
+            }
         }
 
         public void AddCard(ICard card)
         {
-            _hand.Add(card);
+            if (CanAddCard(card))
+            {
+                _hand.Add(card);
+            }
         }
 
         public bool HasCard(ICard card)
@@ -64,11 +67,42 @@ namespace Poker.PokerSolver.Hand
             throw new System.NotImplementedException();
         }
 
+        public List<ICard> GetHand()
+        {
+            return new List<ICard>(_hand);
+        }
+
         public bool IsEmpty()
         {
-            return _hand.Count == 0;
+            return Count == 0;
+        }
+
+        public bool IsFull()
+        {
+            return Count >= MaxSize;
+        }
+
+        public ICard FindHighCard()
+        {
+            if (IsEmpty()) return null;
+            var topCard = _hand[0];
+
+            foreach (var card in _hand)
+            {
+                if (card.Number > topCard.Number)
+                {
+                    topCard = card;
+                }
+            }
+
+            return topCard;
         }
 
         public int Count => _hand.Count;
+
+        private bool CanAddCard(ICard card)
+        {
+            return !HasCard(card) && !IsFull();
+        }
     }
 }
