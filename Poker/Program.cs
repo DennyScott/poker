@@ -11,19 +11,18 @@ namespace Poker
     /// </summary>
     public class Program
     {
-        const string startInstructions =
+        private const string StartInstructions =
             "\nWelcome. Please select from the instructions below by inputing the number, and pressing enter:" +
             "\n 1. Enter Player" +
             "\n 2. Run Game" +
             "\n 3. Restart" +
             "\n 4. Quit";
 
-        const string enterPlayerInstructions =
+        private const string EnterPlayerInstructions =
             "\nPlease enter the player in the format of \"Joe, 4H, 5H, 6H, 7H, 8H\", without quotes, followed by enter.";
 
-        const string runGameText = "\nThe winner(s) are: ";
-
-        const string quitText = "\nThanks for playing!";
+        private const string RunGameText = "\nThe winner(s) are: ";
+        private const string QuitText = "\nThanks for playing!";
 
         public static List<IPlayer> Players = new List<IPlayer>();
         public static IGame Game = new Game();
@@ -40,7 +39,7 @@ namespace Poker
             while (option != 4)
             {
                 //Display Initial Instructions
-                Console.WriteLine(startInstructions);
+                Console.WriteLine(StartInstructions);
 
                 try
                 {
@@ -64,7 +63,7 @@ namespace Poker
                             break;
                         case 4:
                             //Quit
-                            Console.WriteLine(quitText);
+                            Console.WriteLine(QuitText);
                             break;
                     }
                 }
@@ -84,7 +83,7 @@ namespace Poker
         /// <returns></returns>
         public static string CollectPlayerName()
         {
-            Console.WriteLine(enterPlayerInstructions);
+            Console.WriteLine(EnterPlayerInstructions);
             return Console.ReadLine();
         }
 
@@ -122,7 +121,7 @@ namespace Poker
         public static void RunGame()
         {
             var winners = Game.Play(Players);
-            Console.Write(runGameText);
+            Console.Write(RunGameText);
 
             //Display each winner
             foreach (var player in winners)
