@@ -9,7 +9,7 @@ namespace Poker.Test.Combination.Test
     [TestFixture]
     public class FlushTest
     {
-        private IPlayer player, playerTwo, playerThree, playerFour;
+        private IPlayer player, playerTwo, playerThree, playerFour, playerFive;
         private ICombination _combo;
 
         [SetUp]
@@ -43,6 +43,13 @@ namespace Poker.Test.Combination.Test
             playerFour.Hand.AddCard(new Card("JD"));
             playerFour.Hand.AddCard(new Card("QD"));
 
+            playerFive = new Player("five");
+            playerFive.Hand.AddCard(new Card("8H"));
+            playerFive.Hand.AddCard(new Card("9H"));
+            playerFive.Hand.AddCard(new Card("10H"));
+            playerFive.Hand.AddCard(new Card("JH"));
+            playerFive.Hand.AddCard(new Card("QH"));
+
             _combo = new Flush();
         }
 
@@ -69,6 +76,14 @@ namespace Poker.Test.Combination.Test
             var expectedWinner = new List<IPlayer>() {playerFour};
 
             Assert.AreEqual(expectedWinner, _combo.FindHighestHand(gameOne));
+        }
+
+        [Test]
+        public void ComparingTwoFlushWithSameNumberShouldTie()
+        {
+            var gameTwo = new List<IPlayer>() {playerFour, playerFive};
+            
+            Assert.AreEqual(gameTwo, _combo.FindHighestHand(gameTwo));
         }
     }
 }

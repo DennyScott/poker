@@ -6,49 +6,65 @@ using Poker.PokerSolver.Player;
 
 namespace Poker
 {
-    class Program
+    /// <summary>
+    /// Program Runner
+    /// </summary>
+    public class Program
     {
         const string startInstructions =
-            "Welcome. Please select from the instructions below by inputing the number, and pressing enter:" +
+            "\nWelcome. Please select from the instructions below by inputing the number, and pressing enter:" +
             "\n 1. Enter Player" +
             "\n 2. Run Game" +
             "\n 3. Restart" +
             "\n 4. Quit";
 
         const string enterPlayerInstructions =
-            "Please enter the player in the format of \"Joe, 4H, 5H, 6H, 7H, 8H\", without quotes, followed by enter.";
+            "\nPlease enter the player in the format of \"Joe, 4H, 5H, 6H, 7H, 8H\", without quotes, followed by enter.";
 
-        const string runGameText = "The winner(s) are: ";
+        const string runGameText = "\nThe winner(s) are: ";
 
-        const string quitText = "Thanks for playing!";
+        const string quitText = "\nThanks for playing!";
 
-        private static List<IPlayer> _players;
-        private static IGame _game;
+        public static List<IPlayer> Players = new List<IPlayer>();
+        public static IGame Game = new Game();
 
+        /// <summary>
+        /// Main Runner
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             var option = 0;
-            _players = new List<IPlayer>();
-            _game = new Game();
 
+            // Ask for user input, if input= 4, stop.
             while (option != 4)
             {
+                //Display Initial Instructions
                 Console.WriteLine(startInstructions);
 
                 try
                 {
+                    //Get Instruction from user
                     option = int.Parse(Console.ReadLine());
 
                     switch (option)
                     {
                         case 1:
-                            EnterPlayer();
+                            //enter player name
+                            var playerData = CollectPlayerName();
+                            EnterPlayer(playerData);
                             break;
                         case 2:
+                            //Run the game
                             RunGame();
                             break;
                         case 3: 
+                            //Reset the Game
                             ResetGame();
+                            break;
+                        case 4:
+                            //Quit
+                            Console.WriteLine(quitText);
                             break;
                     }
                 }
@@ -59,11 +75,26 @@ namespace Poker
             }
         }
 
-        private static void EnterPlayer()
+        /// <summary>
+        /// Collect the Player name. This assumed the following format:
+        /// 
+        /// Name, Card, Card, Card, Card, Card
+        /// Joe, 2H, 3H, 4H, 5H, 9H
+        /// </summary>
+        /// <returns></returns>
+        public static string CollectPlayerName()
         {
             Console.WriteLine(enterPlayerInstructions);
-            var playerData = Console.ReadLine();
+            return Console.ReadLine();
+        }
 
+        /// <summary>
+        /// Parse the player name and cards from input, and add each card
+        /// to a new player. Once complete, add player to list of current players.
+        /// </summary>
+        /// <param name="playerData">Data to clean, and make new player from.</param>
+        public static void EnterPlayer(string playerData)
+        {
             var splitData = playerData.Split(',');
 
             var player = new Player(splitData[0].Trim());
@@ -73,19 +104,27 @@ namespace Poker
                 player.Hand.AddCard(new Card(splitData[i].Trim()));
             }
 
-            _players.Add(player);
+            Players.Add(player);
         }
 
-        private static void ResetGame()
+        /// <summary>
+        /// Reset the current game by clearing the list of players.
+        /// </summary>
+        public static void ResetGame()
         {
-            _players.Clear();
+            Players.Clear();
         }
 
-        private static void RunGame()
+        /// <summary>
+        /// Run the Game.  This will call the PokerSolver library and
+        /// determine the winner(s).
+        /// </summary>
+        public static void RunGame()
         {
-            var winners = _game.Play(_players);
+            var winners = Game.Play(Players);
             Console.Write(runGameText);
 
+            //Display each winner
             foreach (var player in winners)
             {
                 Console.Write(player.Name);

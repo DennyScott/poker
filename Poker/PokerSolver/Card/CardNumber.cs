@@ -1,5 +1,8 @@
 ﻿namespace Poker.PokerSolver.Card
 {
+    /// <summary>
+    /// Possible Card Numbers, matching their values.
+    /// </summary>
     public enum CardNumber
     {
         NotAssigned = -1,
